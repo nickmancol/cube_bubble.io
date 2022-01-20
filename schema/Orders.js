@@ -6,11 +6,36 @@ cube(`Orders`, {
     // Learn more here: https://cube.dev/docs/caching/pre-aggregations/getting-started  
   },
   
-  joins: {
-    
+  segments: {
+    Consumer: {
+      sql: `${CUBE}.segment = 'Consumer'`
+    },
+    Corporate: {
+      sql: `${CUBE}.segment = 'Corporate'`
+    },
+    HomeOffice: {
+      sql: `${CUBE}.segment = 'Home Office'`
+    },
+    All:{
+      sql: ``
+    }
   },
   
   measures: {
+    uniqueOrders: {
+      sql: `order_id`,
+      type: 'countDistinct',
+    },
+
+    customers: {
+      sql: 'customer_id',
+      type: `countDistinct`
+    },
+    
+    items: {
+      sql: `quantity`,
+      type: `sum`
+    },
     count: {
       type: `count`,
       drillMembers: [orderId, customerId, customerName, country, city, productId, productName, orderDate, shipDate]
