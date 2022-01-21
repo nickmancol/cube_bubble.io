@@ -36,6 +36,7 @@ cube(`Orders`, {
       sql: `quantity`,
       type: `sum`
     },
+    
     count: {
       type: `count`,
       drillMembers: [orderId, customerId, customerName, country, city, productId, productName, orderDate, shipDate]
